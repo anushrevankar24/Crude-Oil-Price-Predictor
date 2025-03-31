@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import pandas as pd89
+import pandas as pd
 import joblib
 import config
 import tensorflow as tf
