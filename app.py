@@ -31,22 +31,18 @@ XGB_MODEL_PATH = "lstm_multi_xgb_model.pkl"
 # Load models
 lstm_model = load_model(LSTM_MODEL_PATH, compile=False)
 xgb_model = joblib.load(XGB_MODEL_PATH)
+max_predictions = 5  
 
 # Create LSTM feature extractor
 feature_extractor = Model(inputs=lstm_model.input, outputs=lstm_model.get_layer("lstm2").output)
 
 def get_latest_sequence(data, n_input):
-    """Extract the last `n_input` steps from the dataset."""
     return np.array([data[-n_input:]])
 
 def predict(n_output):
-    """Make predictions using the LSTM and XGBoost models, limited to `n_output` steps."""
     latest_sequence = get_latest_sequence(scaled_data, N_INPUT)
     lstm_features = feature_extractor.predict(latest_sequence)
     xgb_predictions = xgb_model.predict(lstm_features)
-    
-    # Ensure predictions are limited to 5 steps max
-    max_predictions = 5  
     xgb_predictions = xgb_predictions[:max_predictions]  # Always take only the first 5
     
     # Prepare scaled predictions
@@ -55,12 +51,12 @@ def predict(n_output):
     
     # Inverse transform
     final_predictions = scaler.inverse_transform(scaled_predictions)[:, 0]
-    
-    return final_predictions[:n_output]  # Return only first `n_output` values
+     
+    return final_predictions[:n_output]  
 
 # Sidebar Navigation
 st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Go to", ["Home", "About", "Methodology", "Results"])
+page = st.sidebar.selectbox("Go to", ["Home", "About", "Dataset", "Results","Tech Stack"])
 
 if page == "Home":
     st.markdown('<div class="main-title">Department of Information Technology</div>', unsafe_allow_html=True)
@@ -96,15 +92,73 @@ if page == "Home":
 
                 # Display the container
                 st.markdown(prediction_content, unsafe_allow_html=True)
+                
 
-elif page == "About":
-    st.header("About the Project")
-    st.write("This project predicts WTI Crude Oil Spot Prices using Deep Learning and Machine Learning models...")
-    
-elif page == "Methodology":
-    st.header("Methodology")
-    st.write("The prediction model uses LSTM for feature extraction and XGBoost for final price prediction...")
-    
+# About Page
+if page == "About":
+    st.markdown('<div class="title">About the Project</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section"><p class="content">'
+        'The <b>WTI Crude Oil Price Predictor</b> is a hybrid deep learning and machine learning model that forecasts crude oil prices for up to five months. '
+        'Developed at the Department of Information Technology, NITK Surathkal, the model integrates <b>LSTM networks</b> and <b>XGBoost regression</b> to provide accurate predictions. '
+        'An interactive web app built using <b>Streamlit</b> enables easy visualization and user-friendly forecasting.</p></div>',
+        unsafe_allow_html=True,
+    )
+
+elif page == "Dataset":
+    st.markdown('<div class="title">Dataset</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section"><p class="content">'
+        'The model is trained on historical WTI crude oil price data, including economic indicators such as:</p>'
+        '<ul class="content">'
+        '<li><b>WTI Spot Prices</b> (Target variable)</li>'
+        '<li><b>US Dollar Index</b></li>'
+        '<li><b>Gold Prices</b></li>'
+        '<li><b>Index of Global Economic Activity</b></li>'
+        '<li><b>10-Year US Bond Yield</b></li>'
+        '</ul>'
+        '<p class="content">Data is preprocessed with <b>MinMaxScaler</b> and structured using a <b>sliding window approach</b> to enhance model training.</p></div>',
+        unsafe_allow_html=True,
+    )
+
+# Results Page
 elif page == "Results":
-    st.header("Results")
-    st.write("The results showcase the accuracy and effectiveness of the hybrid LSTM-XGBoost model in predicting oil prices...")
+    st.markdown('<div class="title">Results</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section"><p class="content">'
+        'The hybrid LSTM-XGBoost model achieves strong forecasting performance, balancing temporal sequence modeling with robust regression.</p>'
+        '<div class="metric-box">R² Score: 0.5319</div>'
+        '<div class="metric-box">MAE: 0.0808</div>'
+        '<div class="metric-box">MSE: 0.0099</div>'
+        '<div class="metric-box">RMSE: 0.0997</div>'
+        '<div class="metric-box">MAPE: 26.79%</div>'
+        '<p class="content">The model’s competitive performance reflects its ability to capture trends despite the volatility of oil prices.</p></div>',
+        unsafe_allow_html=True,
+    )
+
+# Tech Stack Page
+elif page == "Tech Stack":
+    st.markdown('<div class="title">Tech Stack</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section"><p class="content">'
+        '<b>Machine Learning & Deep Learning:</b>'
+        '<ul class="content">'
+        '<li><b>TensorFlow/Keras</b> – LSTM-based feature extraction</li>'
+        '<li><b>XGBoost</b> – Multi-output regression</li>'
+        '<li><b>scikit-learn</b> – Data preprocessing & evaluation</li>'
+        '</ul>'
+        '<b>Data Processing:</b>'
+        '<ul class="content">'
+        '<li><b>Pandas & NumPy</b> – Data manipulation</li>'
+        '<li><b>MinMaxScaler</b> – Feature scaling</li>'
+        '</ul>'
+        '<b>Web Application:</b>'
+        '<ul class="content">'
+        '<li><b>Streamlit</b> – UI and visualization</li>'
+        '<li><b>Matplotlib/Seaborn</b> – Graphing and charts</li>'
+        '</ul>'
+        '<p class="content">This stack ensures efficient forecasting, seamless interaction, and insightful visualization.</p></div>',
+        unsafe_allow_html=True,
+    )
+                
+

@@ -11,6 +11,40 @@ PAGE_CONFIG = {
 
 CUSTOM_CSS = """
     <style>  
+      .title {
+                font-size: 50px;
+                font-weight: bold;
+                color: #004B87;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .section {
+                background:#F0F8FF;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .content {
+                font-size: 30px;
+                line-height: 1.6;
+                color: #333;
+            }
+            .metric-box {
+                background: white;
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+                font-size: 30px;
+                font-weight: bold;
+                color: #004B87;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            }
+              .input-label {
+                font-size: 22px;
+                font-weight: bold;
+                color: #004B87;
+            }
    
     .stButton button {
         background-color: #00308F;
@@ -37,31 +71,7 @@ CUSTOM_CSS = """
         margin-bottom: 10px;
         
     }
-     .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #FFF8F0;
-        color: #6c757d;
-        text-align: center;
-        padding: 5px 0;
-        font-size: 10px;
-    }
-    .footer a {
-        color: #FF7518;
-        text-decoration: none;
-        margin: 0 5px;
-    }
-    .footer a:hover {
-        color: #FF5F1F;
-    }
-    .footer img {
-        height: 20px;
-        width: 20px;
-        margin-right: 3px;
-        vertical-align: middle;
-    }
+    
    .prediction-container {
         background-color: #F0F8FF;
         padding: 20px;
