@@ -13,6 +13,15 @@ This application provides monthly forecasts of WTI crude oil spot prices using a
 - Hybrid model combining neural networks with gradient boosting
 - Responsive UI with intuitive controls
 
+## 🌐 Live Deployment
+
+The application is deployed and accessible online at:
+
+🔗 **[Live Demo: WTI Crude Oil Price Predictor](https://crudeoilpricepredictor.streamlit.app/)**
+
+This Streamlit-based web application allows users to interactively forecast crude oil prices based on historical data. Users can select the forecast period (1-5 months) and visualize predicted trends.
+
+
 ## 📊 Dataset
 
 The project uses historical WTI crude oil price data stored in `wti-dataset.csv`. The data includes:
@@ -20,7 +29,7 @@ The project uses historical WTI crude oil price data stored in `wti-dataset.csv`
 - US Dollar Index
 - Gold Price (USD)
 - Index of Global Economic Activity
-- 10 Year Bond Yield for USA
+- 10-Year Bond Yield for the USA
 
 ## 🧠 Methodology
 
@@ -75,7 +84,7 @@ The best hyperparameters found through GridSearchCV were:
 
 Required Python packages are listed in `requirements.txt` and include:
 
-
+```
 joblib==1.3.2
 keras==3.9.1
 numpy==1.26.4
@@ -89,19 +98,23 @@ scikit-learn==1.6.1
 streamlit==1.44.0
 tensorflow==2.17.0
 xgboost==3.0.0
-
+```
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/anushrevankar24/Crude-Oil-Price-Predictor.git
+   cd Crude-Oil-Price-Predictor
+   ```
 2. Install required packages:
-   
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 3. Run the Streamlit app:
-   
+   ```bash
    streamlit run app.py
-   
+   ```
 
 ## 🖥 Application Interface
 
@@ -111,19 +124,10 @@ The application features a user-friendly interface with four main sections:
 - **Methodology**: Details about the technical approach used
 - **Results**: Performance evaluation and model comparison
 
+
 ## 👥 Contributors
 
-This project was developed by **Anush Revankar** and **Aishini Bhattacharjee** under the guidance of **Prof. Jaidhar C.D**.
+This project was developed by **Anush Revankar** and **Aishini Bhattacharjee**
 
-## 📝 License
 
-[Add appropriate license information]
 
-## 🔗 Links
-
-- [Prof. Jaidhar's profile](https://infotech.nitk.ac.in/faculty/jaidhar-c-d)
-- [Department of Information Technology, NITK](https://infotech.nitk.ac.in/)
-
----
-
-*This README was last updated on April 1, 2025*
